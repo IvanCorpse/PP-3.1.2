@@ -1,13 +1,10 @@
 package kata.PP_3_1_2_springbootapp.controller;
 
-import kata.PP_3_1_2_springbootapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import kata.PP_3_1_2_springbootapp.model.User;
 import kata.PP_3_1_2_springbootapp.service.UserService;
 
 
@@ -44,13 +41,19 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/updateUser")
-    public String updateUser(@RequestParam("id") Integer id, ModelMap model) {
+    @GetMapping("/editUser")
+    public String editUser(@RequestParam("id") Integer id, ModelMap model) {
         model.addAttribute("user", userService.getUser(id));
-        return "updateUser";
+        return "editUser";
     }
 
-    @GetMapping("/removeUser")
+    @PutMapping("/updateUser")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping("/removeUser")
     public String removeUser(@RequestParam("id") Integer id) {
         userService.removeUser(id);
         return "redirect:/users";

@@ -2,8 +2,6 @@ package kata.PP_3_1_2_springbootapp.model;
 
 import jakarta.persistence.*;
 
-//import javax.persistence.*;
-
 @Entity
 @Table(name = "users")
 public class User {

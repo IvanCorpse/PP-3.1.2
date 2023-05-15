@@ -1,15 +1,14 @@
 package kata.PP_3_1_2_springbootapp.service;
 
-import kata.PP_3_1_2_springbootapp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import kata.PP_3_1_2_springbootapp.dao.UserDao;
+import kata.PP_3_1_2_springbootapp.model.User;
 
 import java.util.List;
 
 @Service("userService")
-@Transactional
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
 
@@ -24,8 +23,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void saveUser(User user) {
         userDao.saveUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        userDao.updateUser(user);
     }
 
     @Override
@@ -34,6 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void removeUser(Integer id) {
         userDao.removeUser(id);
     }

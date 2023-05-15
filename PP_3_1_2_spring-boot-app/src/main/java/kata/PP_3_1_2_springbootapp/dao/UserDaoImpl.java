@@ -1,11 +1,10 @@
 package kata.PP_3_1_2_springbootapp.dao;
 
+import org.springframework.stereotype.Repository;
 import kata.PP_3_1_2_springbootapp.model.User;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
-
-
 import java.util.List;
 
 @Repository("userDao")
@@ -22,11 +21,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-        if (user.getId() == null) {
-            entityManager.persist(user);
-        } else {
-            entityManager.merge(user);
-        }
+        entityManager.persist(user);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        entityManager.merge(user);
     }
 
     @Override
